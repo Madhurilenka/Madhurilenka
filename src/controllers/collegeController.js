@@ -1,6 +1,7 @@
 const collegeModel = require("../models/collegeModel");
 const internModel = require("../models/internModel");
 const url = require("valid-url");
+const { set } = require("mongoose");
 
 const createCollege = async (req, res) => {
   try {
@@ -47,8 +48,7 @@ const createCollege = async (req, res) => {
     } else {
       //response in case the data already exists in db
       return res.status(400).send({
-        status: false,
-        msg: "this college name is already registered",
+        status: false,msg: "this college name is already registered",
       });
     }
   } catch (err) {
@@ -57,6 +57,7 @@ const createCollege = async (req, res) => {
 };
 
 const collegeDetails = async (req, res) => {
+  // res.setHeader('Access-Control-Allow-Origin','*')      ////frontend deployement
   try {
     let data = req.query;
     let { collegeName } = data; //destructuring the collegeName from the data
